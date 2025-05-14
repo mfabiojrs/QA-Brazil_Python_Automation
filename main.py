@@ -9,6 +9,13 @@ class TestUrbanRoutes:
     # - Termine a linha com dois-pontos :
     # - Escreva o corpo da função indentado (com recuo)
 
+    @classmethod
+    def setup_class(cls):
+        if helpers.is_url_reachable(data.URBAN_ROUTES_URL):  # Instrução a condição verdadeira ou falsa
+            print("Conectado ao servidor Urban Routes")  # Se for True exibe a mensagem especificada na tela.
+        else:  # Instrução a condição verdadeira ou falsa
+            print("Não foi possível conectar ao Urban Routes. Verifique se o servidor está ligado e ainda em execução.")  # Se for False exibe a mensagem especificada na tela.
+
     def test_set_route(self):
         #Adicionar em S8
         print("função criada para definir a rota")  # Exibe a mensagem especificada na tela.

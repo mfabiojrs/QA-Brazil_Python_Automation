@@ -1,7 +1,7 @@
 # Arquivo com constantes
 
 # URL do servidor de teste
-URBAN_ROUTES_URL    = ''
+URBAN_ROUTES_URL    = 'https://cnt-b06aea8f-fc5a-40f1-8164-480921fa5675.containerhub.tripleten-services.com?lng=pt'
 
 # Descrição             Dados de teste
 ADDRESS_FROM        = 'East 2nd Street, 601'    # Endereço do local da partida
