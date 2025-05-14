@@ -49,7 +49,8 @@ class TestUrbanRoutes:
     def test_order_2_ice_creams(self):
         #Adicionar em S8
         print("função criada para selecionar 2 sorvetes")  # Exibe a mensagem especificada na tela.
-        pass  # 'pass' indica que a função ainda não faz nada
+        for i in range(0, 2): # Definição do ciclo, iterar duas vezes
+            pass  # 'pass' indica que a função ainda não faz nada
 
     def test_car_search_model_appears(self):
         #Adicionar em S8
