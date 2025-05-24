@@ -1,4 +1,6 @@
 import data, helpers # <- importando
+from selenium.webdriver import DesiredCapabilities
+from selenium import webdriver
 
 class TestUrbanRoutes:
 
@@ -6,7 +8,7 @@ class TestUrbanRoutes:
     # - Use a palavra-chave 'def'
     # - Escreva o nome da função
     # - Coloque os parâmetros entre parênteses ()
-    # - Termine a linha com dois-pontos :
+    # - Termine a linha com dois-pontos:
     # - Escreva o corpo da função indentado (com recuo)
 
     @classmethod
@@ -15,6 +17,11 @@ class TestUrbanRoutes:
             print("Conectado ao servidor Urban Routes")  # Se for True exibe a mensagem especificada na tela.
         else:  # Instrução a condição verdadeira ou falsa
             print("Não foi possível conectar ao Urban Routes. Verifique se o servidor está ligado e ainda em execução.")  # Se for False exibe a mensagem especificada na tela.
+
+        # não modifique, pois precisamos do registro adicional habilitado para recuperar o código de confirmação do telefone
+        capabilities = DesiredCapabilities.CHROME
+        capabilities["goog:loggingPrefs"] = {'performance': 'ALL'}
+        cls.driver = webdriver.Chrome()
 
     def test_set_route(self):
         #Adicionar em S8
@@ -56,3 +63,7 @@ class TestUrbanRoutes:
         #Adicionar em S8
         print("função criada para definir o modelo de busca de carro")  # Exibe a mensagem especificada na tela.
         pass  # 'pass' indica que a função ainda não faz nada
+
+    @classmethod
+    def teardown_class(cls):
+        cls.driver.quit()
