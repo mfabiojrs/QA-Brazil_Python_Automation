@@ -34,9 +34,9 @@ class TestUrbanRoutes:
         urban_routes_page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
 
     def test_select_plan(self):
-        #Adicionar em S8
-        print("função criada para selecionar o plano")  # Exibe a mensagem especificada na tela.
-        pass  # 'pass' indica que a função ainda não faz nada
+        self.driver.get(data.URBAN_ROUTES_URL)
+        urban_routes_page = UrbanRoutesPage(self.driver)
+        urban_routes_page.choose_comfort_car(data.ADDRESS_FROM, data.ADDRESS_TO)
 
     def test_fill_phone_number(self):
         #Adicionar em S8
