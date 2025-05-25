@@ -1,6 +1,10 @@
-import data, helpers # <- importando
+import time, data, helpers # <- importando
+
 from selenium.webdriver import DesiredCapabilities
 from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
+
+from pages import UrbanRoutesPage
 
 
 class TestUrbanRoutes:
@@ -25,9 +29,9 @@ class TestUrbanRoutes:
         cls.driver = webdriver.Chrome()
 
     def test_set_route(self):
-        #Adicionar em S8
-        print("função criada para definir a rota")  # Exibe a mensagem especificada na tela.
-        pass  # 'pass' indica que a função ainda não faz nada
+        self.driver.get(data.URBAN_ROUTES_URL)
+        urban_routes_page = UrbanRoutesPage(self.driver)
+        urban_routes_page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
 
     def test_select_plan(self):
         #Adicionar em S8
