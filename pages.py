@@ -20,6 +20,8 @@ class UrbanRoutesPage:
     BUTTON_ADD_LOCATOR = (By.CSS_SELECTOR, '.pp-buttons button[type="submit"]')
     CLOSE_PAYMENT_METHOD_LOCATOR = (By.CSS_SELECTOR, '.close-button.section-close')
 
+    MESSAGE_TO_DRIVER_LOCATOR = (By.CSS_SELECTOR, '.input-container #comment')
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)  # Espera explícita de até 10 segundos
@@ -93,3 +95,7 @@ class UrbanRoutesPage:
         self.click_card_number_label()
         self.click_button_add_card()
         self.click_close_payment_method()
+
+    # Método que preenche a mensagem para o motorista
+    def enter_message_to_driver(self, message):
+        self.driver.find_element(*self.MESSAGE_TO_DRIVER_LOCATOR).send_keys(message)
