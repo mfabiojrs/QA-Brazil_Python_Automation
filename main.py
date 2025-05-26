@@ -44,9 +44,10 @@ class TestUrbanRoutes:
         pass  # 'pass' indica que a função ainda não faz nada
 
     def test_fill_card(self):
-        #Adicionar em S8
-        print("função criada para preencher o cartão")  # Exibe a mensagem especificada na tela.
-        pass  # 'pass' indica que a função ainda não faz nada
+        self.driver.get(data.URBAN_ROUTES_URL)
+        urban_routes_page = UrbanRoutesPage(self.driver)
+        urban_routes_page.choose_comfort_car(data.ADDRESS_FROM, data.ADDRESS_TO)
+        urban_routes_page.choose_card_as_payment_method(data.CARD_NUMBER, data.CARD_CODE)
 
     def test_comment_for_driver(self):
         #Adicionar em S8
