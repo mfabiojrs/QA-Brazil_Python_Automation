@@ -28,6 +28,8 @@ class UrbanRoutesPage:
 
     MESSAGE_TO_DRIVER_LOCATOR = (By.CSS_SELECTOR, '.input-container #comment')
 
+    BUTTON_COUNT_TO_ICE_CREAM = (By.CLASS_NAME, 'counter-plus')
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)  # Espera explícita de até 10 segundos
@@ -130,3 +132,9 @@ class UrbanRoutesPage:
     # Método que preenche a mensagem para o motorista
     def enter_message_to_driver(self, message):
         self.driver.find_element(*self.MESSAGE_TO_DRIVER_LOCATOR).send_keys(message)
+
+    # Método que clica/seleciona 2 sorvete
+    def click_button_ice_cream(self):
+        ice_cream = self.driver.find_element(*self.BUTTON_COUNT_TO_ICE_CREAM)
+        for i in range(0, 2):
+            ice_cream.click()
