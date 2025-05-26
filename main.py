@@ -39,9 +39,10 @@ class TestUrbanRoutes:
         urban_routes_page.choose_comfort_car(data.ADDRESS_FROM, data.ADDRESS_TO)
 
     def test_fill_phone_number(self):
-        #Adicionar em S8
-        print("função criada para preencher o número de telefone")  # Exibe a mensagem especificada na tela.
-        pass  # 'pass' indica que a função ainda não faz nada
+        self.driver.get(data.URBAN_ROUTES_URL)
+        urban_routes_page = UrbanRoutesPage(self.driver)
+        urban_routes_page.choose_comfort_car(data.ADDRESS_FROM, data.ADDRESS_TO)
+        urban_routes_page.add_phone_number(data.PHONE_NUMBER)
 
     def test_fill_card(self):
         self.driver.get(data.URBAN_ROUTES_URL)

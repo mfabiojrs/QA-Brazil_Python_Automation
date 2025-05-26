@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from helpers import retrieve_phone_code
 
 
 class UrbanRoutesPage:
@@ -11,6 +12,11 @@ class UrbanRoutesPage:
 
     RACE_LOCATOR = (By.CSS_SELECTOR, '.button.round')
     SELECT_COMFORT_LOCATOR = (By.CSS_SELECTOR, '.tcard-icon')
+
+    PHONE_NUMBER_LOCATOR = (By.CSS_SELECTOR, '.np-button')
+    PHONE_NUMBER = (By.ID, 'phone')
+    SUBMIT_PHONE_NUMBER_LOCATOR = (By.CSS_SELECTOR, '.button.full')
+    SMS_CODE = (By.ID, 'code')
 
     PAYMENT_METHOD_LOCATOR = (By.CSS_SELECTOR, '.pp-button.filled')
     CARD_METHOD_LOCATOR = (By.CSS_SELECTOR, '.pp-row.disabled')
@@ -51,6 +57,31 @@ class UrbanRoutesPage:
             choose_car_list[0].click()  # Seleciona o primeiro carro disponível se houver menos de 5
         else:
             return  # Nenhum carro disponível, não faz nada
+
+    def click_phone_number(self):
+        self.wait.until(EC.element_to_be_clickable(self.PHONE_NUMBER_LOCATOR)).click()
+
+    def enter_phone_number(self, phone_number):
+        self.driver.find_element(*self.PHONE_NUMBER).send_keys(phone_number)
+
+    def click_next_button(self):
+        self.driver.find_element(*self.SUBMIT_PHONE_NUMBER_LOCATOR).click()
+
+    def enter_sms_code(self):
+        sms_code = retrieve_phone_code(self.driver)
+        self.driver.find_element(*self.SMS_CODE).send_keys(sms_code)
+
+    def submit_phone_number(self):
+        button = self.driver.find_elements(*self.SUBMIT_PHONE_NUMBER_LOCATOR)
+        select_button = button[1]
+        select_button.click()
+
+    def add_phone_number(self, phone_number):
+        self.click_phone_number()
+        self.enter_phone_number(phone_number)
+        self.click_next_button()
+        self.enter_sms_code()
+        self.submit_phone_number()
 
     # Método que clica na forma de pagamento
     def click_payment_method(self):
