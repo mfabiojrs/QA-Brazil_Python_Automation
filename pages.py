@@ -30,6 +30,8 @@ class UrbanRoutesPage:
 
     BUTTON_COUNT_TO_ICE_CREAM = (By.CLASS_NAME, 'counter-plus')
 
+    BUTTON_CAR_SEARCH = (By.CLASS_NAME, 'smart-button')
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)  # Espera explícita de até 10 segundos
@@ -138,3 +140,7 @@ class UrbanRoutesPage:
         ice_cream = self.driver.find_element(*self.BUTTON_COUNT_TO_ICE_CREAM)
         for i in range(0, 2):
             ice_cream.click()
+
+    # Método que clica em chamar 'táxi'
+    def click_button_car_search(self):
+        self.driver.find_element(*self.BUTTON_CAR_SEARCH).click()
