@@ -42,11 +42,11 @@ class UrbanRoutesPage:
 
     # Método que preenche o campo De
     def enter_from_location(self, from_text):
-        self.wait.until(EC.element_to_be_clickable(self.FROM_LOCATOR)).send_keys(from_text) # # Espera explícita para que o campo carregue
+        self.wait.until(EC.element_to_be_clickable(self.FROM_LOCATOR)).send_keys(from_text) # Espera explícita para que o elemento seja carregado
 
     # Método que preenche o campo Para
     def enter_to_location(self, to_text):
-        self.wait.until(EC.element_to_be_clickable(self.TO_LOCATOR)).send_keys(to_text) # Espera explícita para que o campo carregue
+        self.wait.until(EC.element_to_be_clickable(self.TO_LOCATOR)).send_keys(to_text) # Espera explícita para que o elemento seja carregado
 
     # Método que preenche o campo De e Para
     def enter_locations(self, from_text, to_text):
@@ -58,7 +58,7 @@ class UrbanRoutesPage:
         self.enter_from_location(from_text)
         self.enter_to_location(to_text)
         self.wait.until(EC.element_to_be_clickable(self.RACE_LOCATOR)).click()
-        choose_car_list = self.wait.until(EC.presence_of_all_elements_located(self.SELECT_COMFORT_LOCATOR))
+        choose_car_list = self.wait.until(EC.presence_of_all_elements_located(self.SELECT_COMFORT_LOCATOR)) # Espera explícita para que os elementos seja carregado
         if len(choose_car_list) > 4:
             choose_car_list[4].click()  # Se pelo menos 5 carros, selecionar o 5º (índice 4)
         elif choose_car_list:
@@ -66,24 +66,30 @@ class UrbanRoutesPage:
         else:
             return  # Nenhum carro disponível, não faz nada
 
+    # Método que clicar em adicionar número de telefone
     def click_phone_number(self):
         self.wait.until(EC.element_to_be_clickable(self.PHONE_NUMBER_LOCATOR)).click()
 
+    # Método que preenche o campo número de telefone
     def enter_phone_number(self, phone_number):
         self.driver.find_element(*self.PHONE_NUMBER).send_keys(phone_number)
 
+    # Método que clica em avançar no processo de adicionar telefone
     def click_next_button(self):
         self.driver.find_element(*self.SUBMIT_PHONE_NUMBER_LOCATOR).click()
 
+    # Método que preencher o código sms
     def enter_sms_code(self):
-        sms_code = retrieve_phone_code(self.driver)
+        sms_code = retrieve_phone_code(self.driver) # Obtém o código sms
         self.driver.find_element(*self.SMS_CODE).send_keys(sms_code)
 
+    # Método que clica para finalizar o número de telefone
     def submit_phone_number(self):
         button = self.driver.find_elements(*self.SUBMIT_PHONE_NUMBER_LOCATOR)
         select_button = button[1]
         select_button.click()
 
+    # Método que adiciona número de telefone etapa por etapa
     def add_phone_number(self, phone_number):
         self.click_phone_number()
         self.enter_phone_number(phone_number)
@@ -149,8 +155,8 @@ class UrbanRoutesPage:
 
     # Método que clica/seleciona 2 sorvete
     def click_button_ice_cream(self):
-        ice_cream = self.driver.find_element(*self.BUTTON_COUNT_TO_ICE_CREAM)
-        for i in range(0, 2):
+        ice_cream = self.wait.until(EC.element_to_be_clickable(self.BUTTON_COUNT_TO_ICE_CREAM)) # Espera explícita para que o elemento seja carregado
+        for i in range(0, 2): # Iterar duas vezes
             ice_cream.click()
 
     # Método que clica em chamar 'táxi'
