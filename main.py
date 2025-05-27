@@ -6,6 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from pages import UrbanRoutesPage
 
+# Cria uma classe para os testes
 class TestUrbanRoutes:
 
     #Definindo função
@@ -15,6 +16,7 @@ class TestUrbanRoutes:
     # - Termine a linha com dois-pontos:
     # - Escreva o corpo da função indentado (com recuo)
 
+    # Inicia o driver do Chrome uma vez para a classe
     @classmethod
     def setup_class(cls):
         if helpers.is_url_reachable(data.URBAN_ROUTES_URL):  # Instrução a condição verdadeira ou falsa
@@ -27,19 +29,21 @@ class TestUrbanRoutes:
         capabilities["goog:loggingPrefs"] = {'performance': 'ALL'}
         cls.driver = webdriver.Chrome()
 
+    # Define campo De e Para
     def test_set_route(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         urban_routes_page = UrbanRoutesPage(self.driver)
         urban_routes_page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
         time.sleep(2) # Apenas para conseguir visualizar o teste sem que o browser feche muito rápido após concluir o teste
 
+    # Define campo De e Para, seleciona a corrida Comfort
     def test_select_plan(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         urban_routes_page = UrbanRoutesPage(self.driver)
         urban_routes_page.choose_comfort_car(data.ADDRESS_FROM, data.ADDRESS_TO)
         time.sleep(2) # Apenas para conseguir visualizar o teste sem que o browser feche muito rápido após concluir o teste
 
-
+    # Define campo De e Para, seleciona a corrida Comfort, adiciona número do telefone
     def test_fill_phone_number(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         urban_routes_page = UrbanRoutesPage(self.driver)
@@ -47,6 +51,7 @@ class TestUrbanRoutes:
         urban_routes_page.add_phone_number(data.PHONE_NUMBER)
         time.sleep(2) # Apenas para conseguir visualizar o teste sem que o browser feche muito rápido após concluir o teste
 
+    # Define campo De e Para, seleciona a corrida Comfort, adiciona cartão como forma de pagamento
     def test_fill_card(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         urban_routes_page = UrbanRoutesPage(self.driver)
@@ -54,6 +59,7 @@ class TestUrbanRoutes:
         urban_routes_page.choose_card_as_payment_method(data.CARD_NUMBER, data.CARD_CODE)
         time.sleep(2) # Apenas para conseguir visualizar o teste sem que o browser feche muito rápido após concluir o teste
 
+    # Define campo De e Para, seleciona a corrida Comfort, adiciona mensagem para o mótorista
     def test_comment_for_driver(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         urban_routes_page = UrbanRoutesPage(self.driver)
@@ -61,14 +67,16 @@ class TestUrbanRoutes:
         urban_routes_page.enter_message_to_driver(data.MESSAGE_FOR_DRIVER)
         time.sleep(2) # Apenas para conseguir visualizar o teste sem que o browser feche muito rápido após concluir o teste
 
+    # Define campo De e Para, seleciona a corrida Comfort, seleciona opcionais 'cobertor' e 'lençóis', e verica o interruptor
     def test_order_blanket_and_handkerchiefs(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         urban_routes_page = UrbanRoutesPage(self.driver)
         urban_routes_page.choose_comfort_car(data.ADDRESS_FROM, data.ADDRESS_TO)
         urban_routes_page.click_button_blanket_and_sheets()
-        assert urban_routes_page.is_blanket_and_sheets_selected(), f"O interruptor do cobertor e lenços não foi alterado."
+        assert urban_routes_page.is_blanket_and_sheets_selected(), f"O interruptor do cobertor e lenços não foi alterado." # caso o interruptor não for selecionada, no caso 'falso' a mensagem deverá aparecer
         time.sleep(2) # Apenas para conseguir visualizar o teste sem que o browser feche muito rápido após concluir o teste
 
+    # Define campo De e Para, seleciona a corrida Comfort, selecionar opcionais, dois sorvetes
     def test_order_2_ice_creams(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         urban_routes_page = UrbanRoutesPage(self.driver)
@@ -76,6 +84,7 @@ class TestUrbanRoutes:
         urban_routes_page.click_button_ice_cream()
         time.sleep(2) # Apenas para conseguir visualizar o teste sem que o browser feche muito rápido após concluir o teste
 
+    # Define campo De e Para, seleciona a corrida Comfort, adiciona mensagem para o mótorista, confirma o pedido da corrida
     def test_car_search_model_appears(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         urban_routes_page = UrbanRoutesPage(self.driver)
@@ -84,6 +93,7 @@ class TestUrbanRoutes:
         urban_routes_page.click_button_car_search()
         time.sleep(2) # Apenas para conseguir visualizar o teste sem que o browser feche muito rápido após concluir o teste
 
+    # Fecha o driver do browser após todos testes
     @classmethod
     def teardown_class(cls):
         cls.driver.quit()
