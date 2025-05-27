@@ -28,6 +28,10 @@ class UrbanRoutesPage:
 
     MESSAGE_TO_DRIVER_LOCATOR = (By.CSS_SELECTOR, '.input-container #comment')
 
+    BUTTON_BLANKET_AND_SHEETS_LOCATOR = (By.CLASS_NAME, 'switch')
+
+    SWITCH_BLANKET_AND_SHEETS_LOCATOR = (By.CLASS_NAME, 'switch-input')
+
     BUTTON_COUNT_TO_ICE_CREAM = (By.CLASS_NAME, 'counter-plus')
 
     BUTTON_CAR_SEARCH = (By.CLASS_NAME, 'smart-button')
@@ -134,6 +138,14 @@ class UrbanRoutesPage:
     # Método que preenche a mensagem para o motorista
     def enter_message_to_driver(self, message):
         self.driver.find_element(*self.MESSAGE_TO_DRIVER_LOCATOR).send_keys(message)
+
+    # Método que seleciona cobertor e lençóis
+    def click_button_blanket_and_sheets(self):
+        self.driver.find_element(*self.BUTTON_BLANKET_AND_SHEETS_LOCATOR).click()
+
+    # Método que retorna se o interruptor foi selecionado
+    def is_blanket_and_sheets_selected(self):
+        return self.driver.find_element(*self.SWITCH_BLANKET_AND_SHEETS_LOCATOR).is_selected()
 
     # Método que clica/seleciona 2 sorvete
     def click_button_ice_cream(self):

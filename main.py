@@ -6,7 +6,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from pages import UrbanRoutesPage
 
-
 class TestUrbanRoutes:
 
     #Definindo função
@@ -57,9 +56,11 @@ class TestUrbanRoutes:
         urban_routes_page.enter_message_to_driver(data.MESSAGE_FOR_DRIVER)
 
     def test_order_blanket_and_handkerchiefs(self):
-        #Adicionar em S8
-        print("função criada para definir cobertor e lenços")  # Exibe a mensagem especificada na tela.
-        pass  # 'pass' indica que a função ainda não faz nada
+        self.driver.get(data.URBAN_ROUTES_URL)
+        urban_routes_page = UrbanRoutesPage(self.driver)
+        urban_routes_page.choose_comfort_car(data.ADDRESS_FROM, data.ADDRESS_TO)
+        urban_routes_page.click_button_blanket_and_sheets()
+        assert urban_routes_page.is_blanket_and_sheets_selected(), f"O interruptor do cobertor e lenços não foi alterado."
 
     def test_order_2_ice_creams(self):
         self.driver.get(data.URBAN_ROUTES_URL)
